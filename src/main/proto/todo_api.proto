@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.redbirdcodes.todo.api.grpc";
+
+package todo;
+
+service ToDoApi {
+  // Obtains an specific data using the id
+  rpc GetToDo(Id) returns (ToDo) {}
+  // Obtains a list of data
+  rpc ListToDos(Empty) returns (stream ToDo) {}
+  // Save new data
+  rpc SaveToDo(ToDo) returns (Empty) {}
+  // Update data
+  rpc UpdateToDo(ToDo) returns (Empty) {}
+  // Delete data
+  rpc DeleteToDo(Id) returns (Empty) {}
+}
+
+// Message for Identification
+message Id {
+  int64 id = 1;
+}
+
+// Empty message
+message Empty {
+
+}
+
+// Data message
+message ToDo {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
